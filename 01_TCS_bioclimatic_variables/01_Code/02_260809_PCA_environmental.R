@@ -111,7 +111,7 @@ environment_database_full <- environment_database %>% left_join(pc_scores_full, 
 
 
 
-write.csv(environment_database_full,"environment_database_tcs_full_250512.csv",row.names = FALSE)
+fwrite(environment_database_full,"environment_database_tcs_full_250512.csv.gz")
 
 
 
