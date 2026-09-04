@@ -1176,55 +1176,6 @@ S21 <- plot_grid(S21A,
 
 S21
 
-#### Comparing growth between isolates from RC and TCS ####
-
-RC_params_auc_gcplyr <- fread("C:\\Users\\Ariel\\OneDrive - personalmicrosoftsoftware.uci.edu\\Desktop\\Growthcurves\\CSG\\Respirator_collection\\ave_params_RC_auc_gcplyr.csv") %>% 
-  filter(carbon == "D-Glucose")
-
-ave_params_glu_auc_gcplyr <- fread("04_TCS_thermal_performance_curves/02_Output/ave_params_glu_auc_gcplyr.csv.gz") 
-
-intersect(ave_params_glu_auc_gcplyr$seqID,RC_params_auc_gcplyr$curve_id)
-
-RC_params_auc_gcplyr <- RC_params_auc_gcplyr %>% filter(curve_id %in% ave_params_glu_auc_gcplyr$seqID) %>%
-  rename("seqID" = "curve_id")
-
-ave_params_glu_auc_gcplyr <- ave_params_glu_auc_gcplyr %>% filter(seqID %in% RC_params_auc_gcplyr$seqID)
-
-
-RC_params_auc_gcplyr$exp <- "RC"
-ave_params_glu_auc_gcplyr$exp <- "TCS"
-
-combined_params <- bind_rows(RC_params_auc_gcplyr,ave_params_glu_auc_gcplyr)
-
-combined_params %>%
-  ggplot(aes(x = exp, y = rmax))+
-  geom_point(aes(group = seqID))+
-  geom_boxplot(alpha = 0.6)+
-  theme_classic()
-
-combined_params %>%
-  ggplot(aes(x = exp, y = topt))+
-  geom_point(aes(group = seqID,color = as.factor(Isolation.temperature)),size = 3)+
-  geom_line(aes(group = seqID))+
-  geom_boxplot(alpha = 0.6)+
-  theme_classic()
-
-combined_params %>%
-  ggplot(aes(x = exp, y = ctmin))+
-  geom_point(aes(group = seqID,color = as.factor(Isolation.temperature)),size = 3)+
-  geom_line(aes(group = seqID))+
-  geom_boxplot(alpha = 0.6)+
-  theme_classic()
-
-combined_params %>%
-  ggplot(aes(x = exp, y = ctmax))+
-  geom_point(aes(group = seqID,color = as.factor(Isolation.temperature)),size = 3)+
-  geom_line(aes(group = seqID))+
-  geom_boxplot(alpha = 0.6)+
-  theme_classic()
-
-
-
 
 #### S19 Randomizing sampled temperatures to see effects on TPC fits ####
 
