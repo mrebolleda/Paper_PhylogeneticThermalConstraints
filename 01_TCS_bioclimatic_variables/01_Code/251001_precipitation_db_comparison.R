@@ -29,13 +29,10 @@ paste(parent,"01_TCS_bioclimatic_variables/", sep="") %>% setwd
 
 ## Open data
 # We downloaded available temperature values from September 2010 through December 2022
-dendra_precipitation_data <- fread("02_Data/rainfall_data_ucnrs_240722.csv")[,c(1,15:27)] 
-prism_precipitation_data <- fread("02_Data/rainfall_data_PRISM_240725.csv")
+dendra_precipitation_data <- fread("02_Data/rainfall_data_ucnrs_240722.csv.gz")[,c(1,15:27)] 
+prism_precipitation_data <- fread("02_Data/rainfall_data_PRISM_240725.csv.gz")
 
-# Dendra precipitation is cumulative and starts counting in October
-dendra_precipitation_data_long %>%
-  ggplot(aes(x = time,y = precipitation,color = Site,group = Site))+
-  geom_line()
+
 
 # Format dendra precipitation data
 dendra_precipitation_data_long <- dendra_precipitation_data %>%
@@ -49,6 +46,11 @@ dendra_precipitation_data_long <- dendra_precipitation_data %>%
     Month < 10 ~ "beginning",
     Month >= 10 ~ "end"
   ))
+
+# Dendra precipitation is cumulative and starts counting in October
+dendra_precipitation_data_long %>%
+  ggplot(aes(x = time,y = precipitation,color = Site,group = Site))+
+  geom_line()
 
 # Getting annual precipitation values from dendra
 dendra_precipitation_data_long_sum <- dendra_precipitation_data_long %>%

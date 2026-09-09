@@ -76,6 +76,10 @@ At the beginning of each script there is a code to define the parent directory (
   - `PRISM_raw_files.tar.gz`: *Directory containing the raw files from PRISM. Raw files from PRISM (Site_initials corresponds to the variable of the same name across our dataset). The data obtained from each file were condensed into the rainfall_data_PRISM_240725.csv. We obtained each file manually from the PRISM website by selecting the nearest coordinate pair to each of our sampling sites, with a resolution of 4 km from January 2012 through December 2021. Each file contains a header with additional information on the download date and search values.*
   - `Pinyon_crest_temperature_data.csv.gz`
       - Soil Temp 50 mm Avg degC: Average temperature values in degrees Celsius at a soil depth of 50 mm, after applying offset calculations with Air temperature.
+  - `air-soil-offset-bdc.csv`: This dataset allows us to estimate soil temperatures at the PF site from the difference between air and soil temperature time series of the nearby DC (Boyd Deep Canyon) site.
+    - Deep Canyon Air Temp Avg degC: Average air temperature values in degrees Celsius, at 2 m aboveground.
+    - Deep Canyon Soil Temp 50 mm Avg degC: Average temperature values in degrees Celsius at a soil depth of 50 mm.
+  
 
       
 - **03_Output:** Mainly contains intermediate datasets generated after time-intensive steps, and final output files to be used in other scripts
@@ -233,7 +237,7 @@ At the beginning of each script there is a code to define the parent directory (
 - **02_Data:** Contains relevant data (mostly metadata) for the analyses described above.
   - `phylogenetic_distances_rate_kbase.txt`: Matrix of phylogenetic distances between the isolates kept in the phylogenetic tree for the metric r
   - `phylogenetic_distances_auc_kbase.txt`: Matrix of phylogenetic distances between the isolates kept in the phylogenetic tree for the metric AUC
-  - `CA_State.shp`: Shapefile of the state of California
+  - `CA_State.shp` and `CA_State.shx`: Shapefile of the state of California
   - `250915_ave_preds_CCA_gcplyr_combined.csv`
     - Predicted TPC fits obtained in a separate experiment to evaluate the influence of carbon concentration on TPC shape
     - Relevant column descriptions:

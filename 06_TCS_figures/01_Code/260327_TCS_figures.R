@@ -10,7 +10,6 @@
 # Main sections are indicated with six # symbols, as ###### Name of the section 
 
 #### Set directory to parent folder - files from here are called with relative paths
-#setwd("PATH_TO_YOUR_DIRECTORY/Paper_phylogenetic_models")
 
 #### Load libraries 
 library(extrafont)
@@ -51,6 +50,12 @@ ave_params_gcplyr_combined_common_taxa_rate <- fread("05_TCS_phylogenetic_models
 
 ave_params_gcplyr_combined_major_taxa_auc <- fread("05_TCS_phylogenetic_models/03_Output/ave_params_gcplyr_combined_major_taxa_auc.csv.gz")
 ave_params_gcplyr_combined_major_taxa_rate <- fread("05_TCS_phylogenetic_models/03_Output/ave_params_gcplyr_combined_major_taxa_rate.csv.gz")
+
+ave_preds_gcplyr_combined_common_taxa_auc <- fread("05_TCS_phylogenetic_models/03_Output/ave_preds_gcplyr_combined_common_taxa_auc.csv.gz")
+ave_preds_gcplyr_combined_common_taxa_rate <- fread("05_TCS_phylogenetic_models/03_Output/ave_preds_gcplyr_combined_common_taxa_rate.csv.gz")
+
+ave_preds_gcplyr_combined_major_taxa_auc <- fread("05_TCS_phylogenetic_models/03_Output/ave_preds_gcplyr_combined_major_taxa_auc.csv.gz")
+ave_preds_gcplyr_combined_major_taxa_rate <- fread("05_TCS_phylogenetic_models/03_Output/ave_preds_gcplyr_combined_major_taxa_rate.csv.gz")
 
 
 # Reading tree file and tree metadata 
@@ -188,6 +193,21 @@ S4 <- phylogenetic_distance_matrix_auc_df %>%
 # filtering out low quality TPCs for PCA plotting
 
 tpc_input_gcplyr <- fread("04_TCS_thermal_performance_curves/02_Output/tpc_input_gcplyr_average.csv.gz")
+
+ave_params_gcplyr_combined <- fread("04_TCS_thermal_performance_curves/02_Output/251029_tcs_params_gcplyr.csv.gz")
+ave_preds_gcplyr_combined <- fread("04_TCS_thermal_performance_curves/02_Output/251029_tcs_fits_gcplyr.csv.gz")
+
+ave_preds_gcplyr_combined <- ave_preds_gcplyr_combined %>%
+  mutate(.fitted = if_else(.fitted < 0, 0, .fitted))
+  
+
+ave_params_gcplyr_combined_major_taxa <- ave_params_gcplyr_combined %>% 
+  filter(Order %in% c("Enterobacterales","Pseudomonadales")) %>%
+  droplevels()
+
+ave_preds_gcplyr_combined_major_taxa <- ave_preds_gcplyr_combined %>% 
+  filter(Order %in% c("Enterobacterales","Pseudomonadales")) %>%
+  droplevels()
 
 ave_params_gcplyr_combined_auc <- ave_params_gcplyr_combined %>% filter(metric == "auc")
 ave_params_gcplyr_combined_rate <- ave_params_gcplyr_combined %>% filter(metric == "rate")
@@ -5862,31 +5882,11 @@ S25A1D <- ggplot() +
     legend.box.background = element_rect(fill = 'transparent')
   ) 
 
-S25AA<- S25A1A+ 
-  annotation_custom(ggplotGrob(S25A2A),xmin = 37, xmax = 57, 
-                    ymin = 0.5, ymax = 1.1)
-
-S25AB <- S25A1B + 
-  annotation_custom(ggplotGrob(S25A2B),xmin = 37, xmax = 57, 
-                    ymin = 0.5, ymax = 1.1)
-
-S25AC <- S25A1C + 
-  annotation_custom(ggplotGrob(S25A2C),xmin = 37, xmax = 57, 
-                    ymin = 0.5, ymax = 1.1)
-
-S25AD <- S25A1D + 
-  annotation_custom(ggplotGrob(S25A2D),xmin = 37, xmax = 57, 
-                    ymin = 0.5, ymax = 1.1)
-
-S25 <- plot_grid(S25AB,S25AD,S25AA,S25AC, 
+S25 <- plot_grid(S25A1B,S25A1D,S25A1A,S25A1C, 
                      ncol = 2,
                      rel_widths = c(1,1,1,1),
                      align = "hv",
                      axis = "l")
-
-
-
-
 
 #### Calculating the fraction of time bacteria are exposed to temperatures above Topt rate ####
 
