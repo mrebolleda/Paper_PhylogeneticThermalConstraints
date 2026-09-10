@@ -28,7 +28,7 @@ Within each major directories there are three directories:
 - **03_Output** - Contains the files produced by the scripts in `01_Code`. 
 *Some major directories do not have a data folder and instead use output from previous steps (numbers). We provide the ouptup files in this repository and therefore be able to skip steps.*
 
-At the beginning of each script there is a code to define the parent directory (where is this directory stored in your computer) and set the working directory. After that, all code to open files is set with a relative path based on the structure of this repository. 
+At the beginning of each script there is code to define the parent directory (where is this directory stored in your computer) and set the working directory. You can skip these steps and use other methods to identify the right directory. Paths to all files are written as relative paths according to the directory structure of this repository. 
 
 ## Supplementary data not contained in this repository
 - Raw sequencing reads are available in the NCBI Sequence Read Archive (SRA) under BioProject accession PRJNA1414602. 
