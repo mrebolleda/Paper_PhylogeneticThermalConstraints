@@ -14,11 +14,12 @@ The overall aim of this work was to evaluate the role of phylogenetic constraint
 
 This repository contains data files and R scripts used to analyze the data for the paper. Each folder contains the necessary data for the script (s) to run independently and their outputs. Most data files already contain the necessary subsets of metadata for plotting and wrangling purposes.
 
-- **01_TCS_bioclimatic_variables** - Contains two R scripts used to analyze climate time series. 
+- **01_TCS_bioclimatic_variables** - Contains the data and R scripts used to analyze climate time series. 
 - **02_TCS_Genome_collection** - Contains a short R script to quality filter the assembled genomes from our KBase narrative, along with the taxonomy assignment of the genome collection.
-- **03_TCS_Growth_curves** - Contains the aggregated raw optical density data for our growth kinetics, the R script used to process and curate the data, intermediate steps of data filtering, the final output of the script (used as input for the TPC fitting script in the next folder), and a PDF file with plotted individual growth curves.
-- **04_TCS_Thermal_performance_curves** - Contains the main script to fit the TPCs from the growth curve parameter file, along with several datasets summarized in different ways for plotting or analytic purposes, and PDF files with plotted TPCs for different growth metrics.
-- **05_TCS_Figures** - Contains a very large R script and input data used to make the main and supplementary figures, along with all statistical analyses. 
+- **03_TCS_Growth_curves** - Contains the aggregated raw optical density data for our growth kinetics, the R script used to process and curate the data, intermediate steps of data filtering, the final output of the script (used as input for the TPC fitting script in the next folder).
+- **04_TCS_Thermal_performance_curves** - Contains the main script to fit the TPCs from the growth curve parameter file, along with several datasets summarized in different ways for plotting or analytic purposes.
+- **05_TCS_phylogenetic_models** - Contains a script to merge environmental, taxonomic, and phylogenetic tree data (as well as the resulting files) and a script to date the tree and perform bayesian phylogenetic analyses for supplementary figure 11. 
+- **06_TCS_Figures** - Contains a very large R script and input data used to make the main and supplementary figures, along with all statistical analyses. 
 
 ## General instructions on how to use this repository
 Within each major directories there are three directories: 
